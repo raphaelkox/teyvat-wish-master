@@ -1,15 +1,16 @@
-import FavoritePortrait from '../components/FavoritePortrait';
+import { useState } from 'react'
 import Layout from '../components/Layout'
-import PittyStats from '../components/PittyStats';
+import FavoritePortrait from '../components/FavoritePortrait';
+import PittyStatsCard from '../components/PittyStatsCard';
 
 const Stats = () => {
+  const [fourStarPitty, setFourStarPitty] = useState(0);
+  const [fiveStarPitty, setFiveStarPitty] = useState(0);
+
   return (
     <Layout nav='stats'>
-        <FavoritePortrait />
-        <div className='mx-4 mt-1 mb-4 flex flex-col flex-grow bg-gray-800'>
-          <PittyStats stars={4} value={5} max={10} />
-          <PittyStats stars={5} value={90} max={90}/>
-        </div>
+        <FavoritePortrait circle='true'/>
+        <PittyStatsCard fourStarPitty={fourStarPitty} fiveStarPitty={fiveStarPitty}/>
     </Layout>
   )
 }
