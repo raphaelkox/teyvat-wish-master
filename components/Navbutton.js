@@ -5,7 +5,7 @@ const Navbutton = (props) => {
 
     return(
         <div 
-            className={'w-full h-full flex justify-center items-center ' + 
+            className={'w-full flex justify-center items-center ' + 
             (props.selected === 'true' ? 'bg-gray-500' : '') }
             onClick={() => { router.push('/' + props.page) }}
         >

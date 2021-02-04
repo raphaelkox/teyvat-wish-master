@@ -6,7 +6,7 @@ const Header = () => {
 					Teyvat Wish Master
 				</div>
 			</div>
-			<div className='w-full h-14'></div>
+			<div className='h-14'></div>
 		</>
 	)
 }
