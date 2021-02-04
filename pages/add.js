@@ -1,11 +1,11 @@
 import Layout from '../components/Layout'
 
-const Stats = () => {
+const Add = () => {
   return (
-    <Layout nav='stats'>
+    <Layout nav='add'>
 
     </Layout>
   )
 }
 
-export default Stats;
+export default Add;
