@@ -1,8 +1,8 @@
 const Header = () => {
 	return(
 		<>
-			<div className='fixed w-full h-14 flex items-center bg-gray-700'>
-				<div className='px-4 text-base'>
+			<div className='fixed w-full h-14 flex items-center bg-gray-800'>
+				<div className='px-4 text-lg text-white'>
 					Teyvat Wish Master
 				</div>
 			</div>
