@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import fetch from 'isomorphic-unfetch'
 import Layout from '../components/Layout'
 import WishInput from '../components/WishInput'
 import AddWishInputButton from '../components/AddWishInputButton'
@@ -90,3 +91,20 @@ const Add = () => {
 }
 
 export default Add
+
+export async function getStaticProps(context){
+	const res = await fetch('localhost:3000/api/character')
+	const data = await res.json()
+
+	if (!data) {
+		return {
+		  notFound: true,
+		}
+	  }
+	
+	  return {
+		props: {
+			characters: data
+		}, // will be passed to the page component as props
+	  }
+}
