@@ -4,32 +4,13 @@ import Layout from '../components/Layout'
 import WishInput from '../components/WishInput'
 import AddWishInputButton from '../components/AddWishInputButton'
 
-const Add = () => {
+const Add = ({ characters }) => {
 	const initialWish = [{
 		wishType: 'character',
 		wishItem: 'Albedo'
 	}]
 
 	const [items, setItems] = useState(initialWish)
-
-	const characters = [
-		'Albedo',
-		'Amber',
-		'Barbara',
-		'Bennett',
-		'Diluc',
-		'Diona',
-		'Fischl',
-		'Jean',
-		'Kaeya',
-		'Klee',
-		'Lisa',
-		'Mona',
-		'Noelle',
-		'Razor',
-		'Sucrose',
-		'Venti'
-	]
 
 	const weapons = [
 		'Harbinger of Dawn',
@@ -47,7 +28,7 @@ const Add = () => {
 					const updatedItem = {
 						...item,
 						wishType: value,
-						wishItem: (value === 'character' ? characters[0] : weapons[0])
+						wishItem: (value === 'character' ? characters[0].name : weapons[0])
 					}
 
 					return updatedItem
@@ -93,8 +74,12 @@ const Add = () => {
 export default Add
 
 export async function getStaticProps(context){
-	const res = await fetch('localhost:3000/api/character')
-	const data = await res.json()
+	const res = await fetch('http://localhost:3000/api/character')
+	const objData = await res.json()
+	//console.log(objData.data)
+	const data = Object.keys(objData.data).map(key => objData.data[key])
+
+	console.log(data)
 
 	if (!data) {
 		return {
