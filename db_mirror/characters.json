@@ -1,0 +1,112 @@
+[{
+  "_id": {
+    "$oid": "601d3715b1efbfe1a31baee7"
+  },
+  "stars": 5,
+  "name": "Albedo"
+},{
+  "_id": {
+    "$oid": "601d3d3cd05b672698d755a2"
+  },
+  "name": "Barbara",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3d5ed05b672698d755a3"
+  },
+  "name": "Bennett",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3d81d05b672698d755a4"
+  },
+  "name": "Diluc",
+  "stars": 5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3d92d05b672698d755a5"
+  },
+  "name": "Diona",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3d9bd05b672698d755a6"
+  },
+  "name": "Fischl",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3da4d05b672698d755a7"
+  },
+  "name": "Jean",
+  "stars": 5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3de6d05b672698d755a8"
+  },
+  "name": "Kaeya",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3df4d05b672698d755a9"
+  },
+  "name": "Klee",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3dfcd05b672698d755aa"
+  },
+  "name": "Lisa",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3e06d05b672698d755ab"
+  },
+  "name": "Mona",
+  "stars": 5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3e12d05b672698d755ac"
+  },
+  "name": "Noelle",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3e2cd05b672698d755ad"
+  },
+  "name": "Razor",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3e37d05b672698d755ae"
+  },
+  "name": "Sucrose",
+  "stars": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3e3fd05b672698d755af"
+  },
+  "name": "Venti",
+  "stars": 5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d3e66d05b672698d755b0"
+  },
+  "name": "Amber",
+  "stars": 4,
+  "__v": 0
+}]
