@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Layout from '../components/Layout'
 import WishInput from '../components/WishInput'
+import AddWishInputButton from '../components/AddWishInputButton'
 
 const Add = () => {
 	const initialWish = [{
@@ -82,8 +83,7 @@ const Add = () => {
 						)
 					})
 				}
-				<div className='my-2 w-8 h-8 text-2xl text-white text-center font-bold self-end 
-				rounded-full bg-gray-600' onClick={addItem}>+</div>
+				<AddWishInputButton addItem={addItem} />
 			</div>
 		</Layout>
 	)
