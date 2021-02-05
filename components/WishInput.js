@@ -14,9 +14,17 @@ const WishInput = (props) => {
                 <input type='radio' value='weapon' name='wishType'/> Weapon
             </div>
             <select className='my-2 rounded-xl' value={props.wishItem} onChange={(e) => handleChange(e, 'wishItem')}>
-                <option value='A'>Test 1</option>
-                <option value='B'>Test 2</option>
-                <option value='C'>Test 3</option>
+                {
+                    (props.wishType === 'character')
+                    ?   props.characterData.map(character =>{
+                            return(<option key={character} value={character}>{character}</option>)
+                            }
+                        )
+                    :   props.weaponData.map(weapon =>{
+                            return(<option key={weapon} value={weapon}>{weapon}</option>)
+                            }
+                        )
+                }
             </select>
         </div>
     )

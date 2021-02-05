@@ -1,32 +1,69 @@
-import { useState } from 'react'
-import Layout from '../components/Layout'
+import { useState } from 'react';
+import Layout from '../components/Layout';
 import WishInput from '../components/WishInput';
 
 const Add = () => {
-	const [items, setItems] = useState([{
+	const initialWish = [{
 		wishType: 'character',
-		wishItem: 'A'
-	}]);
+		wishItem: 'Albedo'
+	}];
+
+	const [items, setItems] = useState(initialWish);
+
+	const characters = [
+		'Albedo',
+		'Amber',
+		'Barbara',
+		'Bennett',
+		'Diluc',
+		'Diona',
+		'Fischl',
+		'Jean',
+		'Kaeya',
+		'Klee',
+		'Lisa',
+		'Mona',
+		'Noelle',
+		'Razor',
+		'Sucrose',
+		'Venti'
+	]
+
+	const weapons = [
+		'Harbinger of Dawn',
+		'Debate Club',
+		'Sharpshooter Oath',
+		'Emerald Orb',
+		'Favonius Sword',
+		'Favonius Codex'
+	]
 
 	const setItem = (keyName, index, value)  => {
-		console.log('------------')
-		console.log('values on handler function')
-		console.log(keyName)
-		console.log(index)
-		console.log(value)
-		const tempItems = items;
-		let item = {
-			...tempItems[index],
-			[keyName]: value
-		}
-		console.log('------------')
-		console.log('new item')
-		console.log(item)
-		tempItems[index] = item;
-		setItems(tempItems)
-		console.log('------------')
-		console.log('final state')
-		console.log(items)
+		const newItems = items.map((item, idx) => {
+			if(idx === index){
+				if(keyName === 'wishType'){
+					const updatedItem = {
+						...item,
+						wishType: value,
+						wishItem: (value === 'character' ? characters[0] : weapons[0])
+					}
+
+					return updatedItem;
+				}
+				else{
+					const updatedItem = {
+						...item,
+						[keyName]: value
+					}
+
+					return updatedItem;
+				}								
+			}
+
+			return item;
+		})
+
+		setItems(newItems);
 	}	
 
 	return (
@@ -35,7 +72,7 @@ const Add = () => {
 				{
 					items.map((item, index) => {
 						return(
-							<WishInput key={index} index={index} wishType={item.wishType} wishItem={item.wishItem} setItem={setItem} />
+							<WishInput key={index} index={index} wishType={item.wishType} wishItem={item.wishItem} characterData={characters} weaponData={weapons} setItem={setItem} />
 						)
 					})
 				}
