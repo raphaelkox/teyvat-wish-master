@@ -17,7 +17,7 @@ const WishInput = (props) => {
                             }
                         )
                     :   props.weaponData.map(weapon =>{
-                            return(<option key={weapon} value={weapon}>{weapon}</option>)
+                            return(<option key={weapon._id} value={weapon.name}>{weapon.name}</option>)
                             }
                         )
                 }

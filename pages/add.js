@@ -4,22 +4,13 @@ import Layout from '../components/Layout'
 import WishInput from '../components/WishInput'
 import AddWishInputButton from '../components/AddWishInputButton'
 
-const Add = ({ characters }) => {
+const Add = ({ characters, weapons }) => {
 	const initialWish = [{
 		wishType: 'character',
 		wishItem: 'Albedo'
 	}]
 
 	const [items, setItems] = useState(initialWish)
-
-	const weapons = [
-		'Harbinger of Dawn',
-		'Debate Club',
-		'Sharpshooter Oath',
-		'Emerald Orb',
-		'Favonius Sword',
-		'Favonius Codex'
-	]
 
 	const setItem = (keyName, index, value)  => {
 		const newItems = items.map((item, idx) => {
@@ -28,7 +19,7 @@ const Add = ({ characters }) => {
 					const updatedItem = {
 						...item,
 						wishType: value,
-						wishItem: (value === 'character' ? characters[0].name : weapons[0])
+						wishItem: (value === 'character' ? characters[0].name : weapons[0].name)
 					}
 
 					return updatedItem
@@ -74,14 +65,15 @@ const Add = ({ characters }) => {
 export default Add
 
 export async function getStaticProps(context){
-	const res = await fetch('http://localhost:3000/api/character')
-	const objData = await res.json()
-	//console.log(objData.data)
-	const data = Object.keys(objData.data).map(key => objData.data[key])
+	const charRes = await fetch('http://localhost:3000/api/character')
+	const charRawData = await charRes.json()
+	const charData = Object.keys(charRawData.data).map(key => charRawData.data[key])
+	
+	const weaponRes = await fetch('http://localhost:3000/api/weapon')
+	const weaponRawData = await weaponRes.json()
+	const weaponData = Object.keys(weaponRawData.data).map(key => weaponRawData.data[key])
 
-	console.log(data)
-
-	if (!data) {
+	if (!charData || !weaponData) {
 		return {
 		  notFound: true,
 		}
@@ -89,7 +81,8 @@ export async function getStaticProps(context){
 	
 	  return {
 		props: {
-			characters: data
+			characters: charData,
+			weapons: weaponData
 		}, // will be passed to the page component as props
 	  }
 }
