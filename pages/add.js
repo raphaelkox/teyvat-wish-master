@@ -5,12 +5,12 @@ import WishInput from '../components/WishInput'
 import AddWishInputButton from '../components/AddWishInputButton'
 
 const Add = ({ characters, weapons }) => {
-	const initialWish = [{
+	const initialWish = {
 		wishType: 'character',
 		wishItem: 'Albedo'
-	}]
+	};
 
-	const [items, setItems] = useState(initialWish)
+	const [items, setItems] = useState([])	
 
 	const setItem = (keyName, index, value)  => {
 		const newItems = items.map((item, idx) => {
@@ -51,12 +51,22 @@ const Add = ({ characters, weapons }) => {
 			<div className='m-4 flex flex-col flex-grow bg-gray-800'>
 				{
 					items.map((item, index) => {
+						console.log(item);
 						return(
 							<WishInput key={index} index={index} wishType={item.wishType} wishItem={item.wishItem} characterData={characters} weaponData={weapons} setItem={setItem} />
 						)
 					})
 				}
 				<AddWishInputButton addItem={addItem} />
+			</div>
+			<div className='z-50 fixed w-full min-h-screen flex justify-center items-center bg-black bg-opacity-70'>
+				<div className='p-1 w-64 h-24 bg-gray-700 text-center text-white'>
+					<div>There are unsaved changes that will be lost, are you sure?</div>
+					<div className='flex justify-center'>
+						<div className='py-2 flex-grow h-10 bg-gray-500'>Yes</div>
+						<div className='py-2 flex-grow h-10 bg-gray-500'>No</div>
+					</div>
+				</div>
 			</div>
 		</Layout>
 	)
@@ -83,6 +93,6 @@ export async function getStaticProps(context){
 		props: {
 			characters: charData,
 			weapons: weaponData
-		}, // will be passed to the page component as props
+		}, 
 	  }
 }
