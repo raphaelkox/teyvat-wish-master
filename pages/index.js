@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Layout from '../components/Layout'
-import FavoritePortrait from '../components/FavoritePortrait';
-import PittyStatsCard from '../components/PittyStatsCard';
+import FavoritePortrait from '../components/FavoritePortrait'
+import PittyStatsCard from '../components/PittyStatsCard'
 
 const Stats = () => {
-  const [fourStarPitty, setFourStarPitty] = useState(0);
-  const [fiveStarPitty, setFiveStarPitty] = useState(0);
+  const [fourStarPitty, setFourStarPitty] = useState(0)
+  const [fiveStarPitty, setFiveStarPitty] = useState(0)
 
   return (
     <Layout nav='stats'>
@@ -15,4 +15,4 @@ const Stats = () => {
   )
 }
 
-export default Stats;
+export default Stats

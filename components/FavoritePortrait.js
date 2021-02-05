@@ -8,4 +8,4 @@ const FavoritePortrait = (props)  => {
     )
 }
 
-export default FavoritePortrait;
+export default FavoritePortrait

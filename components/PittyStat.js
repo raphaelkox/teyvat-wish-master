@@ -1,11 +1,11 @@
 import _ from 'lodash'
-import Progressbar from './Progressbar';
+import Progressbar from './Progressbar'
 
 const PittyStat = (props) => {
-    let stars = [];
+    let stars = []
     _.times(props.stars, (x) => {
-        stars.push(<span key={x}>⭐</span>);
-      }); 
+        stars.push(<span key={x}>⭐</span>)
+      })
 
     return(
         <div className='my-2 bg-gray-700 flex flex-col flex-grow'>

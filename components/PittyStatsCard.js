@@ -1,4 +1,4 @@
-import PittyStat from '../components/PittyStat';
+import PittyStat from '../components/PittyStat'
 
 const PittyStatsCard = (props) => {
     return(
@@ -9,4 +9,4 @@ const PittyStatsCard = (props) => {
     )
 }
 
-export default PittyStatsCard;
+export default PittyStatsCard

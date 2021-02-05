@@ -1,5 +1,5 @@
 const Progressbar = (props) => {
-    const width = props.value / props.max;
+    const width = props.value / props.max
 
     return(
         <div className='my-2 h-3 flex rounded-xl bg-gray-500'>
@@ -12,4 +12,4 @@ const Progressbar = (props) => {
     )
 }
 
-export default Progressbar;
+export default Progressbar

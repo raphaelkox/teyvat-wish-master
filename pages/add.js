@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import Layout from '../components/Layout';
-import WishInput from '../components/WishInput';
+import { useState } from 'react'
+import Layout from '../components/Layout'
+import WishInput from '../components/WishInput'
 
 const Add = () => {
 	const initialWish = [{
 		wishType: 'character',
 		wishItem: 'Albedo'
-	}];
+	}]
 
-	const [items, setItems] = useState(initialWish);
+	const [items, setItems] = useState(initialWish)
 
 	const characters = [
 		'Albedo',
@@ -48,7 +48,7 @@ const Add = () => {
 						wishItem: (value === 'character' ? characters[0] : weapons[0])
 					}
 
-					return updatedItem;
+					return updatedItem
 				}
 				else{
 					const updatedItem = {
@@ -56,15 +56,21 @@ const Add = () => {
 						[keyName]: value
 					}
 
-					return updatedItem;
+					return updatedItem
 				}								
 			}
 
-			return item;
+			return item
 		})
 
-		setItems(newItems);
+		setItems(newItems)
 	}	
+
+	const addItem = () => {
+		const newItems = items.map(item => item)
+		newItems.push(initialWish)
+		setItems(newItems);
+	}
 
 	return (
 		<Layout nav='add'>
@@ -76,10 +82,11 @@ const Add = () => {
 						)
 					})
 				}
-				<div className='my-2 w-8 h-8 text-2xl text-white text-center font-bold self-end rounded-full bg-gray-600'>+</div>
+				<div className='my-2 w-8 h-8 text-2xl text-white text-center font-bold self-end 
+				rounded-full bg-gray-600' onClick={addItem}>+</div>
 			</div>
 		</Layout>
 	)
 }
 
-export default Add;
+export default Add
