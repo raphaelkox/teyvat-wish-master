@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "601d676f195e9f0e880650f0"
+  },
+  "name": "Bloodtainted Greatsword",
+  "type": "claymore",
+  "stars": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d67b2195e9f0e880650f1"
+  },
+  "name": "Black Tassel",
+  "type": "polearm",
+  "stars": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d67c7195e9f0e880650f2"
+  },
+  "name": "Cool Steel",
+  "type": "sword",
+  "stars": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d67fc195e9f0e880650f3"
+  },
+  "name": "Amber Catalyst",
+  "type": "catalyst",
+  "stars": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601d6819195e9f0e880650f4"
+  },
+  "name": "Ebony Bow",
+  "type": "bow",
+  "stars": 3,
+  "__v": 0
+}]
