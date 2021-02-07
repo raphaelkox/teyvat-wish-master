@@ -1,6 +1,6 @@
 const WishInput = (props) => {
     const handleChange = (e, keyName) => {
-        props.setItem(keyName, props.index, e.target.value)        
+        props.setItem(keyName, props.index, e.target.value, props.characterData, props.weaponData)        
     }
 
     return(

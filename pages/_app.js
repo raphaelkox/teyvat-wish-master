@@ -6,11 +6,14 @@ function MyApp({ Component, pageProps }) {
 
 	const [items, setItems] = useState([])
 	const [unsaved, setUnsaved] = useState(false)
+	const [blocked, setBlocked] = useState(true)
+	
+	const setItem = (keyName, index, value, characters, weapons)  => {
 
-	const setItem = (keyName, index, value)  => {
 		const newItems = items.map((item, idx) => {
 			if(idx === index){
 				if(keyName === 'wishType'){
+
 					const updatedItem = {
 						...item,
 						wishType: value,
@@ -42,6 +45,8 @@ function MyApp({ Component, pageProps }) {
 			setItems: setItems,
 			unsaved: unsaved,
 			setUnsaved: setUnsaved,
+			blocked,
+			setBlocked,
 			user: {}
 		}}>
 			<Component {...pageProps} />
