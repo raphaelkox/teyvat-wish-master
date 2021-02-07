@@ -6,8 +6,21 @@ const WishInput = (props) => {
     return(
         <div className='mb-2 p-1 flex flex-col rounded-xl bg-gray-700'>
             <div className='space-x-2 text-white' value={props.wishType} onChange={(e) => handleChange(e, 'wishType')}>
-                <input type='radio' value='character' name={'wishType' + props.index} defaultChecked='true'/> Character
-                <input type='radio' value='weapon' name={'wishType' + props.index}/> Weapon
+                {
+                    (props.wishType === 'character')
+                    ?   (
+                            <>
+                                <input type='radio' value='character' name={'wishType' + props.index} defaultChecked/> Character
+                                <input type='radio' value='weapon' name={'wishType' + props.index} /> Weapon
+                            </>
+                        )
+                    :   (
+                            <>
+                                <input type='radio' value='character' name={'wishType' + props.index} /> Character
+                                <input type='radio' value='weapon' name={'wishType' + props.index} defaultChecked/> Weapon
+                            </>
+                        )
+                }
             </div>
             <select className='my-1 outline-none rounded-xl' value={props.wishItem} onChange={(e) => handleChange(e, 'wishItem')}>
                 {

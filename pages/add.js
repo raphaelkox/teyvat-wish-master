@@ -4,9 +4,10 @@ import MyContext from '../MyContext'
 import Layout from '../components/Layout'
 import WishInput from '../components/WishInput'
 import AddWishInputButton from '../components/AddWishInputButton'
+import DiscardDialog from '../components/DiscardDialog'
 
 const Add = ({ characters, weapons }) => {
-	const {items, setItem, setItems, setUnsaved, blocked, setBlocked} = useContext(MyContext)
+	const {items, setItem, setItems, unsaved, setUnsaved } = useContext(MyContext)
 
 	const initialWish = {
 		wishType: 'character',
@@ -16,11 +17,35 @@ const Add = ({ characters, weapons }) => {
 	const addItem = () => {		
 		const newItems = items.map(item => item)
 		newItems.push(initialWish)
-		setItems(newItems);
-		setUnsaved(true);
+		setItems(newItems)
+		setUnsaved(true)
 	}
 
-	console.log(blocked)
+	const clearItems = () => {
+		setItems([])
+		setUnsaved(false)
+	}
+
+	const saveItems = () => {
+		try {
+			const res = await fetch("http://localhost:3000/api/wish", {
+				method: 'POST',
+				headers: {
+					"Accept": "application/json",
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					authorHandle: "raphaelkox",
+					timestamp: moment(),
+					content: tuitContent,
+					likes: 0
+				})
+			})
+			router.push("/");
+		} catch (error) {
+			console.log(error);
+		}		
+	}
 
 	return (
 		<Layout nav='add'>
@@ -36,27 +61,23 @@ const Add = ({ characters, weapons }) => {
 				<AddWishInputButton addItem={addItem} />
 			</div>
 			{
-				blocked && 
-				<div className='z-50 fixed w-full min-h-screen flex justify-center items-center bg-black bg-opacity-70'>
-					<div className='p-1 w-64 h-24 bg-gray-700 text-center text-white'>
-						<div>Discard Changes?</div>
-						<div className='flex justify-center'>
-							<div className='py-2 flex-grow h-10 bg-gray-500' onClick={() => {
-								setItems([])
-								setUnsaved(false)
-								setBlocked(false)
-							}}>
-								Yes
-							</div>
-							<div className='py-2 flex-grow h-10 bg-gray-500' onClick={() => {
-								setBlocked(false)
-							}}>
-								No
-							</div>
+			unsaved && 
+			<>
+				<div className='h-14'></div>
+				<div className='px-2 py-1 z-50 fixed bottom-14 w-full h-14 flex bg-gray-800'>
+					<div className='mx-1 p-2 flex flex-grow rounded-full justify-center items-center bg-gray-600'>
+						<div>
+							Save
+						</div>
+					</div>
+					<div className='mx-1 p-2 flex flex-grow rounded-full justify-center items-center bg-gray-600' onClick={clearItems}>
+						<div>
+							Clear
 						</div>
 					</div>
 				</div>
-			}			
+			</>
+			}
 		</Layout>
 	)
 }
