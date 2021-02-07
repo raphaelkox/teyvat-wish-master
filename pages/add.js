@@ -5,8 +5,11 @@ import Layout from '../components/Layout'
 import WishInput from '../components/WishInput'
 import AddWishInputButton from '../components/AddWishInputButton'
 import DiscardDialog from '../components/DiscardDialog'
+import dbConnect from '../utils/dbConnect'
+import Character from '../models/Character'
+import Weapon from '../models/Weapon'
 
-const Add = ({ characters, weapons }) => {
+const Add = ({ charsData, weaponsData }) => {
 	const {items, setItem, setItems, unsaved, setUnsaved } = useContext(MyContext)
 
 	const initialWish = {
@@ -26,26 +29,8 @@ const Add = ({ characters, weapons }) => {
 		setUnsaved(false)
 	}
 
-	const saveItems = () => {
-		try {
-			const res = await fetch("http://localhost:3000/api/wish", {
-				method: 'POST',
-				headers: {
-					"Accept": "application/json",
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({
-					authorHandle: "raphaelkox",
-					timestamp: moment(),
-					content: tuitContent,
-					likes: 0
-				})
-			})
-			router.push("/");
-		} catch (error) {
-			console.log(error);
-		}		
-	}
+	const characters = Object.keys(charsData).map(key => charsData[key])
+	const weapons = Object.keys(weaponsData).map(key => weaponsData[key])
 
 	return (
 		<Layout nav='add'>
@@ -85,15 +70,14 @@ const Add = ({ characters, weapons }) => {
 export default Add
 
 export async function getStaticProps(ctx){
-	const charRes = await fetch('http://localhost:3000/api/character')
-	const charRawData = await charRes.json()
-	const charData = Object.keys(charRawData.data).map(key => charRawData.data[key])
-	
-	const weaponRes = await fetch('http://localhost:3000/api/weapon')
-	const weaponRawData = await weaponRes.json()
-	const weaponData = Object.keys(weaponRawData.data).map(key => weaponRawData.data[key])
+	dbConnect()
 
-	if (!charData || !weaponData) {
+	const charsRawData =  await Character.find({})
+	const charsData = JSON.parse(JSON.stringify(charsRawData))
+	const weaponsRawData =  await Weapon.find({})
+	const weaponsData = JSON.parse(JSON.stringify(weaponsRawData))
+
+	if (!charsData || !weaponsData) {
 		return {
 		  notFound: true,
 		}
@@ -101,8 +85,8 @@ export async function getStaticProps(ctx){
 	
 	  return {
 		props: {
-			characters: charData,
-			weapons: weaponData
+			charsData: charsData,
+			weaponsData: weaponsData
 		}, 
 	  }
 }
