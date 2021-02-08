@@ -11,34 +11,36 @@ import Weapon from '../models/Weapon'
 const Add = ({ charsData, weaponsData }) => {
 	const {wishes, setWishes, unsaved, setUnsaved } = useContext(MyContext)			
 
+	const characters = Object.keys(charsData).map(key => charsData[key])
+	const weapons = Object.keys(weaponsData).map(key => weaponsData[key])
+
 	const clearWishes = () => {
 		setWishes([])
 		setUnsaved(false)
 	}
 
-	/*const saveWishes = async () => {
-		try {
-			const res = await fetch("http://localhost:3000/api/wish", {
-			  method: 'POST',
-			  headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json"
-			  },
-			  body: JSON.stringify( {
-				  ,
-				  timestamp: moment(),
-				  content: tuitContent,
-				  likes: 0
-			  })
-			})
-			router.push("/");
-		  } catch (error) {
-			console.log(error);
-		  }
-	}*/
-
-	const characters = Object.keys(charsData).map(key => charsData[key])
-	const weapons = Object.keys(weaponsData).map(key => weaponsData[key])
+	const saveWishes = async () => {
+		wishes.forEach(wish => {
+			try {
+				const res = await fetch("http://localhost:3000/api/wish", {
+				  method: 'POST',
+				  headers: {
+					"Accept": "application/json",
+					"Content-Type": "application/json"
+				  },
+				  body: JSON.stringify( {
+					  wishItem: (wish.wishType === 'character' ? characters[wish.wishItemIndex] : weapons[wish.wishItemIndex]),
+					  wishType: wish.wishType,
+					  content: tuitContent,
+					  likes: 0
+				  })
+				})
+				router.push("/");
+			  } catch (error) {
+				console.log(error);
+			  }
+		});		
+	}	
 
 	return (
 		<Layout nav='add'>
