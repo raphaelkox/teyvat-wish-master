@@ -4,49 +4,49 @@ import MyContext from '../MyContext'
 
 function MyApp({ Component, pageProps }) {
 
-	const [items, setItems] = useState([])
+	const [wishes, setWishes] = useState([])
 	const [unsaved, setUnsaved] = useState(false)
 	const [blocked, setBlocked] = useState(true)
 	
-	const setItem = (keyName, index, value, characters, weapons)  => {
-
-		const newItems = items.map((item, idx) => {
+	const setWishType = (index, value)  => {
+		const newWishes = wishes.map((wish, idx) => {
 			if(idx === index){
-				if(keyName === 'wishType'){
-
-					const updatedItem = {
-						...item,
-						wishType: value,
-						wishItem: (value === 'character' ? characters[0].name : weapons[0].name)
-					}
-
-					return updatedItem
+				const updatedWish = {
+					...wish,
+					wishType: value,
+					wishItemIndex: 0
 				}
-				else{
-					const updatedItem = {
-						...item,
-						[keyName]: value
-					}
-
-					return updatedItem
-				}								
+				return updatedWish
 			}
-
-			return item
+			return wish
 		})
+		setWishes(newWishes)		
+	}
 
-		setItems(newItems)
+	const setWishItemIndex = (index, value)  => {
+		const newWishes = wishes.map((wish, idx) => {
+			if(idx === index){				
+				const updatedWish = {
+					...wish,
+					wishItemIndex: value
+				}
+				return updatedWish							
+			}
+			return wish
+		})
+		setWishes(newWishes)
 	}
 
 	return (
 		<MyContext.Provider value={{
-			items: items,
-			setItem: setItem,
-			setItems: setItems,
+			wishes: wishes,
+			setWishType: setWishType,
+			setWishItemIndex: setWishItemIndex,
+			setWishes: setWishes,
 			unsaved: unsaved,
 			setUnsaved: setUnsaved,
-			blocked,
-			setBlocked,
+			blocked: blocked,
+			setBlocked: setBlocked,
 			user: {}
 		}}>
 			<Component {...pageProps} />

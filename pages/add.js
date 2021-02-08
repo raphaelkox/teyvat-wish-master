@@ -1,33 +1,41 @@
 import { useContext } from 'react'
 import fetch from 'isomorphic-unfetch'
-import MyContext from '../MyContext'
 import Layout from '../components/Layout'
-import WishInput from '../components/WishInput'
 import AddWishInputButton from '../components/AddWishInputButton'
-import DiscardDialog from '../components/DiscardDialog'
+import WishInput from '../components/WishInput'
+import MyContext from '../MyContext'
 import dbConnect from '../utils/dbConnect'
 import Character from '../models/Character'
 import Weapon from '../models/Weapon'
 
 const Add = ({ charsData, weaponsData }) => {
-	const {items, setItem, setItems, unsaved, setUnsaved } = useContext(MyContext)
+	const {wishes, setWishes, unsaved, setUnsaved } = useContext(MyContext)			
 
-	const initialWish = {
-		wishType: 'character',
-		wishItem: 'Albedo'
-	};		
-
-	const addItem = () => {		
-		const newItems = items.map(item => item)
-		newItems.push(initialWish)
-		setItems(newItems)
-		setUnsaved(true)
-	}
-
-	const clearItems = () => {
-		setItems([])
+	const clearWishes = () => {
+		setWishes([])
 		setUnsaved(false)
 	}
+
+	/*const saveWishes = async () => {
+		try {
+			const res = await fetch("http://localhost:3000/api/wish", {
+			  method: 'POST',
+			  headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json"
+			  },
+			  body: JSON.stringify( {
+				  ,
+				  timestamp: moment(),
+				  content: tuitContent,
+				  likes: 0
+			  })
+			})
+			router.push("/");
+		  } catch (error) {
+			console.log(error);
+		  }
+	}*/
 
 	const characters = Object.keys(charsData).map(key => charsData[key])
 	const weapons = Object.keys(weaponsData).map(key => weaponsData[key])
@@ -36,14 +44,13 @@ const Add = ({ charsData, weaponsData }) => {
 		<Layout nav='add'>
 			<div className='m-4 flex flex-col flex-grow bg-gray-800'>
 				{
-					items.map((item, index) => {
-						console.log(item);
+					wishes.map((wish, index) => {
 						return(
-							<WishInput key={index} index={index} wishType={item.wishType} wishItem={item.wishItem} characterData={characters} weaponData={weapons} setItem={setItem} />
+							<WishInput key={index} wishInputIndex={index} wishType={wish.wishType} wishItemIndex={wish.wishItemIndex} characterData={characters} weaponData={weapons} />
 						)
 					})
 				}
-				<AddWishInputButton addItem={addItem} />
+				<AddWishInputButton />
 			</div>
 			{
 			unsaved && 
@@ -55,7 +62,7 @@ const Add = ({ charsData, weaponsData }) => {
 							Save
 						</div>
 					</div>
-					<div className='mx-1 p-2 flex flex-grow rounded-full justify-center items-center bg-gray-600' onClick={clearItems}>
+					<div className='mx-1 p-2 flex flex-grow rounded-full justify-center items-center bg-gray-600' onClick={clearWishes}>
 						<div>
 							Clear
 						</div>
@@ -88,5 +95,6 @@ export async function getStaticProps(ctx){
 			charsData: charsData,
 			weaponsData: weaponsData
 		}, 
+		revalidate: 1
 	  }
 }
